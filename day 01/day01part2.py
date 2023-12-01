@@ -1,3 +1,6 @@
+from day01part1 import part1
+
+
 def translate(line: str) -> str:
     line = line.replace("one", "o1ne")
     line = line.replace("two", "t2wo")
@@ -11,24 +14,19 @@ def translate(line: str) -> str:
     return line
 
 
-def get_first_digit(line: str) -> str:
-    for char in line:
-        if char.isdigit():
-            return char
-
-
 def day01(filename: str) -> str:
-    result = 0
     with open(filename, "r") as file:
         content = file.readlines()
+        result = 0
         for line in content:
-            number = ""
-            number += get_first_digit(line)
-            number += get_first_digit(line[::-1])
-            result += int(number)
+            result += part1(translate(line))
     return result
 
 
 if __name__ == "__main__":
-    print(day01("day 01/day01part2.test"))
-    print(day01("day 01/day01part2.input"))
+    test_result = day01("day 01/day01part2.test")
+    assert (test_result == 281)
+    print(test_result)
+    input_result = day01("day 01/day01part2.input")
+    assert input_result == 54094
+    print(input_result)
