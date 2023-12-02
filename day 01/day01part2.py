@@ -1,4 +1,5 @@
 from day01part1 import part1
+from tooling.file_access import get_content
 
 
 def translate(line: str) -> str:
@@ -14,19 +15,18 @@ def translate(line: str) -> str:
     return line
 
 
-def day01(filename: str) -> str:
-    with open(filename, "r") as file:
-        content = file.readlines()
-        result = 0
-        for line in content:
-            result += part1(translate(line))
+def day01part2(filename: str) -> str:
+    content = get_content(filename)
+    result = 0
+    for line in content:
+        result += part1(translate(line))
     return result
 
 
 if __name__ == "__main__":
-    test_result = day01("input-files/day01part2.test")
+    test_result = day01part2("input-files/day01part2.test")
     assert (test_result == 281)
     print(test_result)
-    input_result = day01("input-files/day01part2.input")
+    input_result = day01part2("input-files/day01part2.input")
     assert input_result == 54094
     print(input_result)
