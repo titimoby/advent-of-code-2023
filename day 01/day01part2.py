@@ -24,9 +24,9 @@ def day01(filename: str) -> str:
 
 
 if __name__ == "__main__":
-    test_result = day01("day 01/day01part2.test")
+    test_result = day01("input-files/day01part2.test")
     assert (test_result == 281)
     print(test_result)
-    input_result = day01("day 01/day01part2.input")
+    input_result = day01("input-files/day01part2.input")
     assert input_result == 54094
     print(input_result)
