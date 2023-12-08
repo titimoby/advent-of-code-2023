@@ -1,4 +1,4 @@
-import math 
+import math
 
 
 def get_content(filename: str) -> list[str]:
@@ -14,11 +14,12 @@ def day06part1(filename: str) -> int:
 
     solution = 1
     delta = math.sqrt(pow(r, 2) - 4 * d)
-    c1 = math.ceil((r + delta)/2)
-    c2 = math.floor((r - delta)/2)
+    c1 = math.ceil((r + delta) / 2)
+    c2 = math.floor((r - delta) / 2)
     print(f"c1=${c1} c2=${c2}")
     solution = c1 - c2 - 1
     return solution
+
 
 if __name__ == "__main__":
     test_result = day06part1("input-files/day06part1.test")
