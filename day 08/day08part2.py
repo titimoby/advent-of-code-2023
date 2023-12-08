@@ -1,4 +1,4 @@
-import time
+import math, time
 
 
 def get_content(filename: str) -> (str, dict):
@@ -15,12 +15,12 @@ def all_nodes_to_Z(nodes) -> bool:
     return len(finished) == len(nodes)
 
 
-def how_many_steps(instructions, network, starting_nodes) -> int:
+def how_many_steps(instructions, network, starting_node) -> int:
     step_counter = 0
-    nodes = starting_nodes
-    while not all_nodes_to_Z(nodes):
+    node = starting_node
+    while node[-1] != 'Z':
         which_instruction = step_counter % len(instructions)
-        nodes = [network[node][instructions[which_instruction]] for node in nodes]
+        node = network[node][instructions[which_instruction]]
         step_counter += 1
     else:
         return step_counter
@@ -28,8 +28,12 @@ def how_many_steps(instructions, network, starting_nodes) -> int:
 
 def day08part1(filename: str) -> int:
     instructions, network = get_content(filename)
+    # only compute for nodes with ending A
     starting_nodes = [key for key in network.keys() if key[-1] == 'A']
-    max_steps = how_many_steps(instructions, network, starting_nodes)
+    max_steps = 1
+    # count steps for all starting nodes and keep track of the least common multiple
+    for node in starting_nodes:
+        max_steps = math.lcm(max_steps, how_many_steps(instructions, network, node))
     return max_steps
 
 
@@ -47,5 +51,5 @@ if __name__ == "__main__":
     time_start = time.perf_counter()
     test_result = day08part1("input-files/day08part2.input")
     print(test_result)
-    # assert test_result == 18727
+    assert test_result == 18024643846273
     print(f'Solved in {time.perf_counter() - time_start:.5f} Sec.')
